@@ -26,6 +26,6 @@ public class Car {
     }
 
     public void drive(int km) {
-        if(isReachable(km)) fuelLevel -= fuelConsumption*km;
+        if (isReachable(km)) fuelLevel -= fuelConsumption * km;
     }
 }
