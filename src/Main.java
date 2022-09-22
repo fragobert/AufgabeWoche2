@@ -9,7 +9,8 @@ public class Main {
         c1.drive(10);
         System.out.println("c1.getMaxKilometers() = " + c1.getMaxKilometers());
 
-        Car c2 = new Car(187, 3, 100, "5er", "mattschwarz", "BMW");
+        Car c2 = new Car(187, 3, 100, "5er BMW", "mattschwarz", "BMW");
+        Car c3 = new Car(420, 5, 100, "Audi R8", "rot", "Audi");
         c2.printDescription();
     }
 }
