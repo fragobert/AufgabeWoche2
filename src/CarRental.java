@@ -8,18 +8,33 @@ public class CarRental {
     private ArrayList<Car> rentedCars = new ArrayList<>();
 
     public CarRental(int arraySize){
-        cars.add(new Car(2019, 10, 100, "M3", "rot", "BMW"));
+        for(int i = 0; i < arraySize; i++){
+            cars.add(new Car((int) (Math.random() * 1000), (int) (Math.random() * 10), (int) (Math.random() * 100), getRandom(names), getRandom(colors),getRandom(brands)));
+        }
+        for (Car car: cars
+             ) {
+            car.printDescription();
+        };
     }
-    public ArrayList<Car> findCars(String brands, String names, String colors){
-        return null;
+    private String getRandom(String[] array){
+        return array[(int) (Math.random() * array.length)];
+    }
+    public boolean findCar(String brands, String names, String colors){
+        return false;
     }
 
     public boolean isAvailable(Car car){
         return !rentedCars.contains(car);
     }
-    public boolean rent(Car car){
+    public boolean rentCar(Car car){
         if(isAvailable(car)){
             rentedCars.add(car);
+            return true;
+        }else return false;
+    }
+    public boolean returnCar(Car car){
+        if(rentedCars.contains(car)){
+            rentedCars.remove(car);
             return true;
         }else return false;
     }
