@@ -11,8 +11,7 @@ public class CarRental {
         for(int i = 0; i < arraySize; i++){
             cars.add(new Car((int) (Math.random() * 1000), (int) (Math.random() * 10), (int) (Math.random() * 100), getRandom(names), getRandom(colors),getRandom(brands)));
         }
-        for (Car car: cars
-             ) {
+        for (Car car: cars) {
             car.printDescription();
         };
     }
