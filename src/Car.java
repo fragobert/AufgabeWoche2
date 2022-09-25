@@ -48,7 +48,8 @@ public class Car {
     public String getBrand() {
         return brand;
     }
-    public int getIndexCar(){
+
+    public int getIndexCar() {
         return indexCar;
     }
 }
