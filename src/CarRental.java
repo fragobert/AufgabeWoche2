@@ -22,7 +22,7 @@ public class CarRental {
     }
 
     public boolean findCar(String brands, String names, String colors) {
-        return false;
+        return true;
     }
 
     public boolean isAvailable(Car car) {
