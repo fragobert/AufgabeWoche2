@@ -16,13 +16,21 @@ public class CarRental {
             cars.add(new Car((int) (Math.random() * 1000), (int) (Math.random() * 10), (int) (Math.random() * 100), getRandom(names), getRandom(colors), getRandom(brands)));
         }
     }
-
+    public Car getCar(int index) {
+        return cars.get(index);
+    }
     private String getRandom(String[] array) {
         return array[(int) (Math.random() * array.length)];
     }
 
-    public boolean findCar(String brands, String names, String colors) {
-        return true;
+    public ArrayList<Car> findCar(String brands, String names, String colors) {
+        ArrayList<Car> foundCars = new ArrayList<>();
+        for (Car car : cars) {
+            if (car.getBrand().equals(brands) && car.getName().equals(names) && car.getColor().equals(colors)) {
+                foundCars.add(car);
+            }
+        }
+        return foundCars;
     }
 
     public boolean isAvailable(Car car) {
@@ -57,7 +65,7 @@ public class CarRental {
     private static String stringFormatter(String string) {
         return String.format("%1$" + 10 + "s", string);
     }
-    public void getCars() {
+    public void carsToString() {
         if (cars.size() == 0) {
             System.out.println("Es sind keine Autos vorhanden!");
         } else {
@@ -70,7 +78,7 @@ public class CarRental {
 
     }
 
-    public void getRentedCars() {
+    public void rentedCarsToString() {
         if (rentedCars.size() == 0) {
             System.out.println("Es sind zurzeit keine Autos vermietet!");
         } else {
