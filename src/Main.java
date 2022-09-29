@@ -28,12 +28,15 @@ public class Main {
                 case 2 -> cr1.getRentedCarsToString();
                 case 3 -> {
                     System.out.println("Bitte geben Sie den Index des Autos an welches sie ausleihen moechten:");
-
-                    cr1.rentCar((int)scanner.nextInt());
+                    cr1.rentCar(scanner.nextInt());
                 }
                 case 4 -> {
-                    System.out.println("Bitte geben Sie den Index des Autos an welches sie zurueckgeben moechten:");
-                    cr1.returnCar(scanner.nextInt());
+                    if(!cr1.getRentedCars().isEmpty()) {
+                        System.out.println("Bitte geben Sie den Index des Autos an welches sie zurueckgeben moechten:");
+                        cr1.returnCar(scanner.nextInt());
+                    }else{
+                        System.out.println(ConsoleColors.RED+"Es wurden keine Autos ausgeliehen"+ConsoleColors.RESET);
+                    }
                 }
                 case 5 -> {
                     System.out.println("Geben sie die Marke des Autos an:");
@@ -46,30 +49,27 @@ public class Main {
                     if (foundCars.size() == 0) {
                         System.out.println(ConsoleColors.RED + "Es wurden keine Autos gefunden!" + ConsoleColors.RESET);
                     } else {
-                        System.out.println("Es wurden folgende Autos gefunden:");
+                        System.out.println("Es wurden " + foundCars.size() + " gefunden!");
                         System.out.println(cr1.CarListToString(foundCars));
                     }
 
                 }
                 case 6 -> {
                     System.out.println("Geben Sie bitte den Index des Autos an:");
-                    if(cr1.isAvailable(cr1.getCar(scanner.nextInt()))) {
+                    if (cr1.isAvailable(cr1.getCar(scanner.nextInt()))) {
                         System.out.println("Das Auto ist verfügbar!");
-                    }else {
+                    } else {
                         System.out.print(ConsoleColors.RED + "Auto ist nicht verfuegbar!" + ConsoleColors.RESET);
                     }
 
                 }
                 case 7 -> {
-                    System.out.print("Programm wird beendet");
-                    for(int i = 0; i < 3; i++) {
-                        System.out.print(".");
-                        Thread.sleep(300);
-                    }
+                    System.out.print("Programm wird beendet...");
+
                     System.exit(0);
                 }
                 default -> {
-                    System.out.print(ConsoleColors.RED + "Ungueltige Eingabe!" + ConsoleColors.RESET);
+                    System.out.println(ConsoleColors.RED + "Ungueltige Eingabe!" + ConsoleColors.RESET);
 
                 }
             }

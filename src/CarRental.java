@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class CarRental {
     private static final String[] brands = {"BMW", "Mercedes", "Audi", "VW", "Opel", "Ford", "Fiat", "Renault", "Peugeot", "Citroen"};
-    private static final String[] names = {"M3", "A45", "RS6", "Golf GTI", "Astra", "Focus", "500", "Clio", "308", "C4"};
+    private static final String[] names = {"M3", "A45", "RS6", "Golf_GTI", "Astra", "Focus", "500", "Clio", "308", "C4"};
     private static final String[] colors = {"rot", "blau", "schwarz", "weiß", "grün", "gelb", "orange", "violett", "pink", "braun"};
     private final ArrayList<Car> cars = new ArrayList<>();
     private final ArrayList<Car> rentedCars = new ArrayList<>();
@@ -29,6 +29,9 @@ public class CarRental {
             }
         }
         return foundCars;
+    }
+    public ArrayList<Car> getRentedCars(){
+        return rentedCars;
     }
 
     public boolean isAvailable(Car car) {
