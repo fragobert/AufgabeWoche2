@@ -21,8 +21,14 @@ public class CarRental {
         return array[(int) (Math.random() * array.length)];
     }
 
-    public boolean findCar(String brands, String names, String colors) {
-        return true;
+    public ArrayList<Car> findCar(String brands, String names, String colors) {
+        ArrayList<Car> foundCars = new ArrayList<>();
+        for (Car car : cars) {
+            if (car.getBrand().equals(brands) && car.getName().equals(names) && car.getColor().equals(colors)) {
+                foundCars.add(car);
+            }
+        }
+        return foundCars;
     }
 
     public boolean isAvailable(Car car) {
@@ -30,55 +36,71 @@ public class CarRental {
     }
 
     public void rentCar(int index) {
-        if (index < cars.size() && index > 0) {
+        if (index <= cars.size() && index > 0) {
             if (isAvailable(cars.get(index-1))) {
                 rentedCars.add(cars.get(index-1));
                 System.out.println("Das Auto wurde erfolgreich ausgeliehen!");
 
-            } else System.out.println("Der " + cars.get(index-1).getColor() + "e " + cars.get(index-1).getName() + " ist leider nicht verfügbar!");
+            } else System.out.println(ConsoleColors.RED + "Auto ist nicht verfuegbar!" + ConsoleColors.RESET);
 
-        } else System.out.println("Das Auto existiert nicht!");
+        } else System.out.println(ConsoleColors.RED + "Auto existiert nicht!" + ConsoleColors.RESET);
 
     }
 
     public void returnCar(int index) {
         if(index <= 0 || index > cars.size()) {
-            System.out.println("Das Auto existiert nicht!");
+            System.out.println(ConsoleColors.RED + "Auto existiert nicht!" + ConsoleColors.RESET);
         }else{
             if(rentedCars.contains(cars.get(index-1))){
                 rentedCars.remove(cars.get(index-1));
                 System.out.println("Das Auto wurde erfolgreich zurueckgegeben!");
             }else{
-                System.out.println("Das Auto wurde nicht ausgeliehen!");
+                System.out.println(ConsoleColors.RED + "Auto ist nicht ausgeliehen!" + ConsoleColors.RESET);
             }
         }
     }
-
+    public Car getCar(int index) {
+        if (index <= 0 || index > cars.size()) {
+            System.out.println(ConsoleColors.RED + "Auto existiert nicht!" + ConsoleColors.RESET);
+            return null;
+        } else {
+            return cars.get(index-1);
+        }
+    }
     private static String stringFormatter(String string) {
         return String.format("%1$" + 10 + "s", string);
     }
-    public void getCars() {
+    public String CarListToString(ArrayList<Car> cars){
+        StringBuilder carList = new StringBuilder();
+        String tabs;
+
+
+        System.out.println(ConsoleColors.BOXING + " Index" + "\t" + stringFormatter("Brand") + " " + stringFormatter("Name") + " " + stringFormatter("Color") + " " + stringFormatter("Model") + " ");
+        for (Car car : cars) {
+            if(car.getIndexCar()>99){
+                tabs = "\t";
+            }else tabs = "\t\t";
+            carList.append(ConsoleColors.WHITE_BRIGHT + " ").append(car.getIndexCar()).append(tabs).append(stringFormatter(car.getBrand())).append(" ").append(stringFormatter(car.getName())).append(" ").append(stringFormatter(car.getColor())).append(" ").append(stringFormatter(Integer.toString(car.getModel()))).append("\n");
+        }
+
+        return carList.toString();
+    }
+    public void getCarstoString() {
         if (cars.size() == 0) {
-            System.out.println("Es sind keine Autos vorhanden!");
+            System.out.println(ConsoleColors.RED + "Keine Autos vorhanden!" + ConsoleColors.RESET);
         } else {
             System.out.println("Alle existierenden Autos:");
-            System.out.println(ConsoleColors.BOXING + " Index" + " " + stringFormatter("Brand") + " " + stringFormatter("Name") + " " + stringFormatter("Color") + " " + stringFormatter("Model") + " ");
-            for (Car car : CarRental.this.cars) {
-                System.out.println(ConsoleColors.WHITE_BRIGHT + " " + car.getIndexCar() + "\t   " + stringFormatter(car.getBrand()) + " " + stringFormatter(car.getName()) + " " + stringFormatter(car.getColor()) + " " + stringFormatter(Integer.toString(car.getModel())));
-            }
+            System.out.println(CarListToString(cars));
         }
 
     }
 
-    public void getRentedCars() {
+    public void getRentedCarsToString() {
         if (rentedCars.size() == 0) {
-            System.out.println("Es sind zurzeit keine Autos vermietet!");
+            System.out.println(ConsoleColors.RED + "Keine Autos ausgeliehen!" + ConsoleColors.RESET);
         } else {
             System.out.println("Alle zurzeit vermieteten Autos:");
-            System.out.println(ConsoleColors.BOXING + " Index" + " " + stringFormatter("Brand") + " " + stringFormatter("Name") + " " + stringFormatter("Color") + " " + stringFormatter("Model") + " ");
-            for (Car car : CarRental.this.rentedCars) {
-                System.out.println(ConsoleColors.WHITE_BRIGHT + " " + car.getIndexCar() + "\t\t" + stringFormatter(car.getBrand()) + " " + stringFormatter(car.getName()) + " " + stringFormatter(car.getColor()) + " " + stringFormatter(Integer.toString(car.getModel())));
-            }
+            System.out.println(CarListToString(rentedCars));
         }
     }
 }
